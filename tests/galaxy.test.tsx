@@ -376,3 +376,21 @@ test('attention after a rescan still moves the comet', async ($, on) => {
   expect(await pane.find({ type: 'Text', text: /→ src\/a\.ts/, in: 'galaxy' })).toBeDefined()
   await pane.unmount()
 })
+
+test('inline, the pane fits header plus galaxy inside the window it opens, on tall and short surfaces', async ($, on) => {
+  repo(on)
+  await open($)
+  for (const [vpRows, body] of [[60, 28], [16, 8]] as const) {
+    const inline = { ...PANE_PROPS, placement: 'inline' as const, scroll: { offset: 0, bodyRows: 3 } }
+    const pane = await $.ui.mount({
+      plugin: 'codebase-galaxy', surface: 'terminal', component: 'Pane', requestId: 'codebase-galaxy',
+      props: inline, viewport: { columns: 100, rows: vpRows },
+    })
+    const client = (await pane.findAll({ type: 'Client' }))[0] as { props?: { height?: number } } | undefined
+    expect(client?.props?.height).toBe(body - 1)
+    await pane.resize({ columns: 100, rows: body - 1 })
+    await pane.advance(330)
+    expect(await pane.find({ type: 'Text', text: /★ 7 stars/, in: 'galaxy' })).toBeDefined()
+    await pane.unmount()
+  }
+})

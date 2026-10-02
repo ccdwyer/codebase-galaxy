@@ -229,7 +229,7 @@ export const register: Register = on => {
     const current = await read($, graph)
     const root = await findRoot($)
     const fresh = e.args.trim() === 'rescan' || current === null || current.root !== root
-    await $.ui.open({ id: PANE, title: 'Codebase Galaxy' })
+    await $.ui.open({ id: PANE, title: 'Codebase Galaxy', rows: 28 })
     const g = fresh ? await rescan($) : current
     if (g === null) return { text: 'Codebase Galaxy: the scan failed; try /galaxy rescan.' }
     const capped = g.total > g.files.length || g.truncated ? ` (of ${g.total}${g.truncated ? '+' : ''})` : ''
@@ -326,7 +326,15 @@ export const register: Register = on => {
       )
     }
     const { Client } = $.ui.resolve(e)
-    const rows = Math.max(6, (e.props.scroll?.bodyRows ?? e.viewport?.rows ?? 30) - 1)
+    // Inline, the pane's body follows its content's height, so sizing the Client from bodyRows
+    // would feed back into itself and collapse it: take a share of the viewport instead.
+    // One body budget for header + Client: no taller than the open request (28) or the surface,
+    // about half the surface otherwise, and never under 6 so a short terminal still fits.
+    const vp = e.viewport?.rows ?? 40
+    const inlineBody = Math.min(28, vp, Math.max(6, Math.floor(vp * 0.5)))
+    const rows = e.props.placement === 'inline'
+      ? inlineBody - 1
+      : Math.max(1, (e.props.scroll?.bodyRows ?? vp) - 1)
     return (
       <Box flexDirection="column">
         {header}

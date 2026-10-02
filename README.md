@@ -1,5 +1,9 @@
 # Codebase Galaxy
 
+![Codebase Galaxy demo](media/demo.gif)
+
+[Watch the MP4](https://github.com/ccdwyer/claude-mods/raw/main/media/codebase-galaxy.mp4) · [Screenshot](media/01-galaxy.png) · [Screenshot](media/02-comet.png)
+
 Your repo as a live, force-directed starfield in braille, inside Claude Code.
 
 - **Stars are files.** Colour is the language, brightness is the file's size, and each folder (two levels deep, like `src/ui`) is its own star system.
