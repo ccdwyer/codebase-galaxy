@@ -1,6 +1,6 @@
 {
   "name": "codebase-galaxy",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Your repo as a live force-directed starfield in braille: files are stars, imports are faint links, and Claude's attention is a comet that flies to every file it reads or edits",
   "types": "./types/index.d.ts",
   "author": {
