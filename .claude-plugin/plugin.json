@@ -1,0 +1,16 @@
+{
+  "name": "codebase-galaxy",
+  "version": "0.1.0",
+  "description": "Your repo as a live force-directed starfield in braille: files are stars, imports are faint links, and Claude's attention is a comet that flies to every file it reads or edits",
+  "types": "./types/index.d.ts",
+  "author": {
+    "name": "Chris Dwyer",
+    "url": "https://github.com/ccdwyer"
+  },
+  "repository": "https://github.com/ccdwyer/codebase-galaxy",
+  "homepage": "https://github.com/ccdwyer/codebase-galaxy",
+  "supportUrl": "https://github.com/ccdwyer/codebase-galaxy/issues",
+  "documentationUrl": "https://github.com/ccdwyer/codebase-galaxy#readme",
+  "privacyPolicyUrl": "https://github.com/ccdwyer/codebase-galaxy/blob/main/PRIVACY.md",
+  "license": "MIT"
+}
